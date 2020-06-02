@@ -119,19 +119,36 @@ const allMessages = [
 ];
 
 
-function threadBuilder (messagesArr, uid) {
 
+
+function threadBuilderAncestors(messagesArr, uid) {
+	var foundIdx;
+	const found = messagesArr.find(element, index => {
+		var ret = element.uid === uid;
+		if (ret) { foundIdx = index; }
+		return ret;
+	});
+	return threadBuilder(messagesArr.slice(0, foundIdx).concat(messagesArr.slice(foundIdx, messagesArr.length)), found.parent) + found;
 }
 
-// use this code to test -- no logs are good
-const result = threadBuilder(allMessages, 'l42f432lk4l999sdj');
-result.forEach((message, i) => {
-	Object.keys(message).forEach(key => {
-		if (message[key] !== idealMessageChain[i][key]) {
-			console.log(`VALIDATOR: value for ${key} does not match for message ${message.uid}`)
-		}
-	});
-});
+function threadBuilder(messagesArr, uid) {
+	// first dig thru ancestors
+	var ret = threadBuilderAncestors(messagesArr, uid);
+
+	while (messagesArr.length) {
+		const found = messagesArr.find(element => element.parent === ret[ret.length - 1].uid);
+		if (typeof found === "undefined") break;
+		ret.concat(found);
+	}
+	return ret;
+}
+
+
 
 // 2 given that we want to read message THREADS, and not just individual messages
 // 		suggest a new data structure for our messaging service
+
+
+// * add threadId element to each object
+// * add threadId index as additional array dimension
+// * both of the above
