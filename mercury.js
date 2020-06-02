@@ -10,7 +10,7 @@
 //		conversations. The messages are stored in an array along with messages
 // 		from other conversations, and are not in chronological order.
 
-// 1 Write a function that takes the allMessages array and the following UID and returns
+// 1 Write a function that takes the an array of messages  and the following UID and returns
 // 		an array that deeply equals the idealMessageChain array.
 //
 // 		UID: 'l42f432lk4l999sdj'

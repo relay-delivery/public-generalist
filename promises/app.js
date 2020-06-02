@@ -5,7 +5,7 @@
 // (1 question)
 //
 // We want to create logs that look like the following for all of our orders:
-// 		"cheeseburger from ronaldo's deli delievered at (date obj here) by mark ross"
+// 		"cheeseburger from ronaldo's deli delievered at 2020-06-02T15:28:39.361Z by mark ross"
 //
 // The following methods are available on the database objects (all return Promises):
 // 		Order.getAllOrders -- returns all orders
@@ -31,50 +31,7 @@ const ProducerLocation = require('./models/ProducerLocation');
 const Rider = require('./models/Rider');
 
 function prettyLogAllOrders () {
-	Order.getAllOrders()
-		.then(orders => {
-			let riders = [];
-			let producers = [];
 
-			for(let order of orders) {
-				riders.push(order.riderId);
-				producers.push(order.producerLocationId);
-			}
-
-			riders = riders.map(i => Rider.getRiderById(i));
-			producers = producers.map(i => ProducerLocation.getProducerLocationById(i));
-
-			Promise.all([Promise.all(riders), Promise.all(producers)]).then(e => {
-				let riderMap = {};
-				let prodMap = {};
-
-				for(let rider of e[0]) {
-					riderMap[rider.riderId] = rider;
-				}
-
-				for(let producer of e[1]) {
-					prodMap[producer.producerLocationId] = producer;
-				}
-
-				for(let order of orders) {
-					let food = order.food;
-					let loc = prodMap[order.producerLocationId].name;
-					let date = order.deliveredAt;
-					let rider = riderMap[order.riderId].name;
-					console.log(
-						food +
-						" from " +
-						loc +
-						" delievered at " +
-						date +
-						" by " +
-						rider);
-				}
-			});
-		})
-		.catch(err => {
-			console.error(err);
-		});
 }
 
 db.once('open', function(){
