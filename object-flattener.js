@@ -29,3 +29,25 @@
 //	"dog.age": 10,
 // }
 
+
+
+function getFlattenedObject(obj) {
+    const flattened = {};
+
+    const flattenObject = function(inObj, path = '') {
+        inObj.forEach((key) => {
+
+            path += '.' + key;
+            // If there are no objects below, we are done.
+            if(Object.keys(inObj[key]).length === 0) {
+                flattened[path] = inObj[Object.keys[0]];
+            } else {
+                flattenedObject(inObj[key], path);
+            }
+        });
+    }
+
+    flattenObject(obj, '');
+
+    return flattened;
+}

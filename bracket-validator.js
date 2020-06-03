@@ -19,3 +19,26 @@
 // 2 Write another bracket validator function that takes multiple bracket types,
 // 		"{}", "[]", and "()". Copy/pasting is encouraged.
 
+function validateBrackets(inString) {
+    const inArr = inString.split('');
+    let counter = 0;
+
+    for(let i = 0; i < inArr.length; i++) {
+        const char = inArr[i];
+
+        if(char === '[') {
+            counter++;
+        } else if(char === ']') {
+            counter--;
+        }
+
+        if(counter < 0) {
+            return false;
+            break;
+        }
+    };
+
+    if(counter === 0) {
+        return true;
+    }
+}

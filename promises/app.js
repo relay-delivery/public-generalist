@@ -31,7 +31,17 @@ const ProducerLocation = require('./models/ProducerLocation');
 const Rider = require('./models/Rider');
 
 function prettyLogAllOrders () {
+	let orderLog = {};
 
+	Order.getAllOrders().then((data) = {
+		// Do something with the orders
+
+		orderLog = data;
+	}).then(() => {
+		//nextDatabaseCall
+	}).then(() => {
+		//lastDatqabaseCall
+	});
 }
 
 db.once('open', function(){
