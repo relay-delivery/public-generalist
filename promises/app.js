@@ -31,6 +31,13 @@ const ProducerLocation = require('./models/ProducerLocation');
 const Rider = require('./models/Rider');
 
 function prettyLogAllOrders () {
+	// order item order.food
+	// producer location order.producerLocationId
+	// order status
+	// order delivery time order.deliveredAt
+	// rider name (get from ID) order.riderId
+
+	
 
 }
 
