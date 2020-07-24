@@ -119,19 +119,5 @@ const allMessages = [
 ];
 
 
-function threadBuilder (messagesArr, uid) {
-
-}
-
-// use this code to test -- no logs are good
-const result = threadBuilder(allMessages, 'l42f432lk4l999sdj');
-result.forEach((message, i) => {
-	Object.keys(message).forEach(key => {
-		if (message[key] !== idealMessageChain[i][key]) {
-			console.log(`VALIDATOR: value for ${key} does not match for message ${message.uid}`)
-		}
-	});
-});
-
 // 2 given that we want to read message THREADS, and not just individual messages
 // 		suggest a new data structure for our messaging service
