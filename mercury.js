@@ -15,6 +15,31 @@
 //
 // 		UID: 'l42f432lk4l999sdj'
 
+// 1) whole thread as convo
+// 2) current model good for set as read
+
+{
+	uid: 'anjasd8ds7fnmsdf8', // messageuid
+	parent: null,
+	body: 'driver gave me the finger',
+	subject: 'unprofessional delivery guy',
+	to: 'relay',
+	from: 'justsalad12',
+
+}
+
+{
+	threadid: 'asdfasdf',
+	messages: [{
+		body: 'driver gave me the finger',
+		subject: 'unprofessional delivery guy',
+		to: 'relay',
+		from: 'justsalad12',
+		read: true/false
+	}]
+}
+
+
 const idealMessageChain = [
 	{
 		uid: 'anjasd8ds7fnmsdf8',
@@ -58,6 +83,32 @@ const idealMessageChain = [
 	},
 ];
 
+// messageMap = { uid: message }
+parentToMessageMap = { parent: message }
+threadArray = [[parent1, nextMsg], [parent2]]
+
+def allThreads(allMessages):
+	parentToMessageMap = {}
+	threadArray = []
+	for message in allMessages:
+		if parent == null:
+			threadArray.push([message])
+		else:
+			parentToMessageMap[message.parent] = message
+	for thread in threadArray:
+		parent = thread[0]
+		while parent:
+			child = parentToMessageMap[child.parent]
+			thread.append(child)
+			parent = child
+		thread.pop() // remove the empty child at the end
+	threadMap = {}
+	for thread in threadArray:
+		threadMap[thread[0].uid] = thread
+	return threadMap
+
+
+
 const allMessages = [
 	{
 		uid: '9807dsfkln3l23lkj',
@@ -93,7 +144,7 @@ const allMessages = [
 	},
 	{
 		uid: '9dskj3209dskjn32323232323232',
-		parent: '32nkjlfdkjh98032jdfmk8976',
+		parent: 'f',
 		body: 'we will get back to you about this',
 		subject: 'RE: FEE',
 		to: 'baladeyourmom',
